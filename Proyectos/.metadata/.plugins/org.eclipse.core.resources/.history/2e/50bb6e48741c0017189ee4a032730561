@@ -1,0 +1,55 @@
+package tablas;
+
+import java.awt.Component;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JFrame;
+import javax.swing.KeyStroke;
+
+public class Main {
+
+	public static void main(String[] args) {
+		JFrame frame = new JFrame("Prueba de tablas");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(500, 500);
+		
+		Panel panel = new Panel();
+		List<Libro> listaLibros = new ArrayList<>();
+		listaLibros.add(new Libro(1, "Harry Popoter", "JK"));
+		listaLibros.add(new Libro(2, "Los truños del hambre", "otro"));
+		panel.addRows(listaLibros);
+		frame.add(panel);
+		frame.setFocusable(true);
+		KeyListener kl = new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+				
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_A)
+					System.out.println("aaaa");
+			}
+		};
+		
+		for (Component c: frame.getComponents()) {
+			c.addKeyListener(kl);
+		}
+			
+
+		frame.setVisible(true);
+
+	}
+
+}

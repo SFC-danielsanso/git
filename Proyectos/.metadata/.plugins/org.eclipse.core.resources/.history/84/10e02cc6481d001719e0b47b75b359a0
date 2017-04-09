@@ -1,0 +1,5 @@
+package sfc.aplicacion.modelo;
+
+public class Libro {
+
+}

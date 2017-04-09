@@ -1,0 +1,22 @@
+package sfc.aplicacion.test;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaBuilder;
+
+public class TestLibros {
+
+	private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("aplicacion");
+	
+	public static void main(String[] args) {
+		
+	}
+	
+	public static void imprimirDatos() {
+		EntityManager manager = emf.createEntityManager();
+		manager.createQuery("FROM LIBRO");
+		//CriteriaBuilder cb = manager.getCriteriaBuilder();
+	}
+	
+}

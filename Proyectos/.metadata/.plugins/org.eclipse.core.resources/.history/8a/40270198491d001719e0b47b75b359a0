@@ -1,0 +1,9 @@
+package sfc.aplicacion.test;
+
+public class TestLibros {
+
+	public static void main(String[] args) {
+		System.out.println("aaa");
+	}
+	
+}

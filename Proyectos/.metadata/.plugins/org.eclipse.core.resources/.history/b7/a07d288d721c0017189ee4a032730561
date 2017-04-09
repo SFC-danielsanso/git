@@ -1,0 +1,96 @@
+package tablas;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.HeadlessException;
+import java.awt.Label;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.io.IOException;
+import java.util.List;
+
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+public class Panel extends JPanel implements KeyListener{
+
+	JTable tabla;
+	DefaultTableModel dtm;
+	
+	public Panel() {
+		setPreferredSize(new Dimension(500,500));
+		setBackground(Color.WHITE);
+		setLayout(new BorderLayout());
+		setFocusable(true);
+		
+		crearTabla();
+		tabla.addKeyListener(this);
+		
+		
+		add(new JScrollPane(tabla), BorderLayout.NORTH);
+		add(new Label("Hola"));
+	}
+	
+	private void crearTabla() {
+		String[] columnas = {"ID", "TITULO", "AUTOR"};
+		dtm = new DefaultTableModel(columnas, 0);
+		tabla = new JTable(dtm) {
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			};
+		};
+	}
+	
+	public void addRows(List<Libro> lista) {
+		Object row[] = new Object[3];
+		for (Libro l:lista) {
+			row[0] = l.getId();
+			row[1] = l.getTitulo();
+			row[2] = l.getAutor();
+			dtm.addRow(row);
+		}
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		//System.out.println("Tecla pulsada...");
+		if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_C) {
+			System.out.println("Copiando...");
+			try {
+				Clipboard cb = Toolkit.getDefaultToolkit().getSystemClipboard();
+				String texto = (String) cb.getData(DataFlavor.stringFlavor);
+				System.out.println("Clipboard antes de borrar: "+texto);
+				
+				//StringSelection ss = new StringSelection("");
+				//cb.setContents(ss, null);
+				//texto = (String) cb.getData(DataFlavor.stringFlavor);
+				//System.out.println("Clipboard despues de borrar: "+texto);
+				
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+			e.consume();
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		//System.out.println("Tecla liberada...");
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		//System.out.println("Tecla escrita...");
+		
+	}
+	
+}

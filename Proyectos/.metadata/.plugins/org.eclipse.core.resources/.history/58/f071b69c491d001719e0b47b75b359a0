@@ -1,0 +1,14 @@
+package sfc.aplicacion.test;
+
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+public class TestLibros {
+
+	EntityManagerFactory emf = Persistence.createEntityManagerFactory("aplicacion");
+	
+	public static void main(String[] args) {
+		System.out.println("aaa");
+	}
+	
+}
